@@ -1,10 +1,15 @@
-package main.java.com.mentorguild.service;
-import main.java.com.mentorguild.model.Lesson;
+package com.mentorguild.service;
+
+import com.mentorguild.model.Lesson;
+import com.mentorguild.model.Mentor;
+
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import  java.util.List;
+import java.util.List;
 
 
 //Gives control over lessons
+@Service
 public class LessonService {
 
     //this is an example of polymorphism. Same interface, different behavior.
@@ -12,7 +17,7 @@ public class LessonService {
 
     public int addLesson(Lesson lesson){
         lessons.add(lesson);
-        return lessons.length;
+        return 0; // TODO: Fix this
     }
     public List<Lesson> getAllLessons(){
         return lessons;

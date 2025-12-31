@@ -1,10 +1,14 @@
-package main.java.com.mentorguild.service;
-import main.java.com.mentorguild.model.Mentor;
+package com.mentorguild.service;
 
+import com.mentorguild.model.Lesson;
+import com.mentorguild.model.Mentor;
+
+import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 public class MentorService {
    private final Map<Integer, Mentor> mentorsById = new HashMap<>();
 

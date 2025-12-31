@@ -1,4 +1,4 @@
-package main.java.com.mentorguild.model;
+package com.mentorguild.model;
 
 public class Lesson {
 //Fields
