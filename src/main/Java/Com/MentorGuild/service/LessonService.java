@@ -10,8 +10,9 @@ public class LessonService {
     //this is an example of polymorphism. Same interface, different behavior.
    private final List<Lesson> lessons = new ArrayList<>();
 
-    public void addLesson(Lesson lesson){
-    lessons.add(lesson);
+    public int addLesson(Lesson lesson){
+        lessons.add(lesson);
+        return lessons.length;
     }
     public List<Lesson> getAllLessons(){
         return lessons;
