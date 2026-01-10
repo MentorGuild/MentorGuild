@@ -1,33 +1,15 @@
 package com.mentorguild.service;
 
 import com.mentorguild.model.Lesson;
-import com.mentorguild.model.Mentor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
+public interface LessonService {
 
-//Gives control over lessons
-@Service
-public class LessonService {
+    int addLesson(Lesson lesson);
+    List<Lesson> getAllLessons();
+    Lesson getLessonById (int lessonId);
 
-    //this is an example of polymorphism. Same interface, different behavior.
-   private final List<Lesson> lessons = new ArrayList<>();
-
-    public int addLesson(Lesson lesson){
-        lessons.add(lesson);
-        return 0; // TODO: Fix this
-    }
-    public List<Lesson> getAllLessons(){
-        return lessons;
-    }
-    public Lesson getLessonById(int lessonId){
-        for(Lesson lesson: lessons){
-        if(lesson.getLessonId() == lessonId){
-            return lesson;
-        }
-        }
-        return null;
-    }
 }
