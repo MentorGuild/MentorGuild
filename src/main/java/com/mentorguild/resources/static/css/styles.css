@@ -1,0 +1,70 @@
+h1 {
+    color: #A6FF00;
+}
+
+h2 {
+    color: white;
+}
+
+li {
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+body {
+    background-image: url("../backgrounds/disclaimer.png");
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-align: center;
+}
+
+.site-header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 80px;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.start-button {
+    display: inline-block;
+    background-color: #1E90FF;
+    color: white;
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+}
+
+.start-button:hover {
+    background-color: #4CC9f0;
+}
+
+.features ul {
+    list-style-type: disc;
+    display: inline-block;
+    text-align: left;
+}
+
