@@ -36,6 +36,11 @@
             <artifactId>spring-boot-starter-logging</artifactId>
             <version>2.7.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version> <!-- Use a compatible version -->
+        </dependency>
     </dependencies>
 
     <build>

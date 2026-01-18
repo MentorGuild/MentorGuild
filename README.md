@@ -24,6 +24,10 @@ Maven installed
 5. To test lesson endpoints (once lessons exist), visit: http://localhost:8080/api/lessons
    If the application is running correctly, the health endpoint should confirm that the server is alive.
 
+## Swagger Endpoint
+1. Build and run the project
+2. Go to http://localhost:8080/swagger-ui/index.html
+
 ## Running Tests with Maven
 From the project root directory, run: mvn test
     
