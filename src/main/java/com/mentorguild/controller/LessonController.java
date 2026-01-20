@@ -10,21 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.mentorguild.model.Lesson;
-import com.mentorguild.service.impl.LessonServiceImpl;
-import com.mentorguild.service.impl.MentorServiceImpl;
+import com.mentorguild.service.LessonService;
 
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/lessons")
 public class LessonController {
-    private final LessonServiceImpl lessonServiceImpl;
-    private  final MentorServiceImpl mentorServiceImpl;
+    private final LessonService lessonService;
+
 //constructor
     @Autowired
-    public LessonController(LessonServiceImpl lessonServiceImpl, MentorServiceImpl mentorServiceImpl){
-        this.lessonServiceImpl = lessonServiceImpl;
-        this.mentorServiceImpl = mentorServiceImpl;
+    public LessonController(LessonService lessonService){
+        this.lessonService = lessonService;
 
     }
 
@@ -37,7 +35,7 @@ public class LessonController {
     public ResponseEntity<String> displayLesson(
         @PathVariable("id") UUID lessonId
     ){
-        Lesson lesson = lessonServiceImpl.getLessonById(lessonId);
+        Lesson lesson = lessonService.getLessonById(lessonId);
         if(lesson == null){
             return ResponseEntity.ok("Lesson not found"); // TODO: This should be 404
         }
@@ -51,7 +49,7 @@ public class LessonController {
             @RequestBody Lesson lesson
     ){
         //store via service
-       UUID newId = lessonServiceImpl.addLesson(lesson);
+       UUID newId = lessonService.addLesson(lesson);
 
         return ResponseEntity.ok("Lesson created " + newId);
     }
