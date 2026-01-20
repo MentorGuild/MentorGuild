@@ -3,10 +3,12 @@ import com.mentorguild.model.Lesson;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.UUID;
+
 //Interface defines what not how
 public interface LessonRepository {
-    int save(Lesson lesson);              // saves a lesson & returns generated id
-    Optional<Lesson> findById(int id); //finds a lesson by ID
+    UUID save(Lesson lesson);              // saves a lesson & returns generated id
+    Optional<Lesson> findById(UUID id); //finds a lesson by ID
     List<Lesson> findAll(); //Retrieves all lessons
 }
 

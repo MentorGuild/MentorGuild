@@ -13,7 +13,8 @@ import com.mentorguild.model.Lesson;
 import com.mentorguild.service.impl.LessonServiceImpl;
 import com.mentorguild.service.impl.MentorServiceImpl;
 
-//Right now (before Spring), your “controller” is basically: a class that accepts requests (from your main method / menu / later HTTP) and delegates to services.
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/lessons")
 public class LessonController {
@@ -28,17 +29,17 @@ public class LessonController {
     }
 
 //Methods
-//    public Lesson getLessonById(int lessonId){
+//    public Lesson getLessonById(UUID lessonId){
 //        return lessonService.getLessonById(lessonId);
 //    }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> displayLesson(
-        @PathVariable("id") int lessonId
+        @PathVariable("id") UUID lessonId
     ){
         Lesson lesson = lessonServiceImpl.getLessonById(lessonId);
         if(lesson == null){
-            return ResponseEntity.ok("Lesson not found"); // TODO: This shuold be 404
+            return ResponseEntity.ok("Lesson not found"); // TODO: This should be 404
         }
         //lesson.displayLesson();
 
@@ -50,7 +51,7 @@ public class LessonController {
             @RequestBody Lesson lesson
     ){
         //store via service
-        int newId = lessonServiceImpl.addLesson(lesson);
+       UUID newId = lessonServiceImpl.addLesson(lesson);
 
         return ResponseEntity.ok("Lesson created " + newId);
     }

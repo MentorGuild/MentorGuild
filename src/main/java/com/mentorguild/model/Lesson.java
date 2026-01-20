@@ -1,5 +1,7 @@
 package com.mentorguild.model;
 
+import java.util.UUID;
+
 public class Lesson {
 //Fields
     private final Mentor mentor;
@@ -7,12 +9,12 @@ public class Lesson {
     private final String topic;
     private final String content;
     private final String[] tags;
-    private final int lessonId;
+    private final UUID lessonId;
 
 
 
     //Constructor
-  public  Lesson(Mentor mentor, String title, String topic, String content, String[] tags, int lessonId){
+  public  Lesson(Mentor mentor, String title, String topic, String content, String[] tags, UUID lessonId){
         this.mentor = mentor;
         this.title = title;
         this.topic = topic;
@@ -37,14 +39,14 @@ public class Lesson {
     public String[] getTags(){
         return tags;
     }
-    public int getLessonId(){
+    public UUID getLessonId(){
         return lessonId;
     }
 //No setters we don't want people changing things
 
     //Methods
     public void displayLesson(){
-        System.out.printf("Welcome to %s %d I'm your mentor %s \n", title, lessonId, mentor.getName() );
+        System.out.printf("Welcome to %s %s I'm your mentor %s \n", title, lessonId, mentor.getName() );
         System.out.printf("Today we will be discussing %s \n", topic);
         printTags();
         System.out.println(content);

@@ -6,6 +6,7 @@ import com.mentorguild.repository.LessonRepository;
 import com.mentorguild.service.LessonService;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.UUID;
 
 //Gives control over lessons
 @Service
@@ -19,7 +20,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public int addLesson(Lesson lesson){
+    public UUID addLesson(Lesson lesson){
         return lessonRepository.save(lesson); //storage delegated to repository
     }
 
@@ -29,7 +30,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public Lesson getLessonById(int lessonId){
+    public Lesson getLessonById(UUID lessonId){
         //delegate; return null for now (better: throw exception later)
         return lessonRepository.findById(lessonId).orElse(null);
     }

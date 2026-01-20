@@ -6,6 +6,7 @@ import com.mentorguild.repository.MentorRepository;
 import com.mentorguild.service.MentorService;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
+import java.util.UUID;
 
 @Service
 public class MentorServiceImpl implements MentorService {
@@ -15,7 +16,7 @@ public class MentorServiceImpl implements MentorService {
         this.mentorRepository = mentorRepository;
     }
     @Override
-    public int addMentor(Mentor mentor) {
+    public UUID addMentor(Mentor mentor) {
         if (mentor == null) {
             throw new IllegalArgumentException("Mentor cannot be null");
         }
@@ -24,7 +25,7 @@ public class MentorServiceImpl implements MentorService {
 
     //example of autoboxing
    @Override
-    public Mentor getMentorById(int idNumber){
+    public Mentor getMentorById(UUID idNumber){
         return mentorRepository.findById(idNumber).orElse(null);
     }
 
