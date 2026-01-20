@@ -2,37 +2,35 @@ package com.mentorguild.service.impl;
 
 import com.mentorguild.model.Lesson;
 
+import com.mentorguild.repository.LessonRepository;
 import com.mentorguild.service.LessonService;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
-
 
 //Gives control over lessons
 @Service
 public class LessonServiceImpl implements LessonService {
 
-    //this is an example of polymorphism. Same interface, different behavior.
-    private final List<Lesson> lessons = new ArrayList<>();
+    private final LessonRepository lessonRepository;
+
+//Constructor injection (Spring will provide InMemoryLessonRepository automatically)
+    public LessonServiceImpl(LessonRepository lessonRepository){
+        this.lessonRepository = lessonRepository;
+    }
 
     @Override
     public int addLesson(Lesson lesson){
-        lessons.add(lesson);
-        return 0; // TODO: Fix this
+        return lessonRepository.save(lesson); //storage delegated to repository
     }
 
     @Override
     public List<Lesson> getAllLessons(){
-        return lessons;
+        return lessonRepository.findAll();
     }
 
     @Override
     public Lesson getLessonById(int lessonId){
-        for(Lesson lesson: lessons){
-            if(lesson.getLessonId() == lessonId){
-                return lesson;
-            }
-        }
-        return null;
+        //delegate; return null for now (better: throw exception later)
+        return lessonRepository.findById(lessonId).orElse(null);
     }
 }

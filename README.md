@@ -1,4 +1,4 @@
-# MentorGuild
+ # MentorGuild
 MentorGuild is a fan-made, educational web platform that teaches technical concepts (starting with cybersecurity) through humorous, chaotic, fandom-inspired mentors. The core idea is to make difficult topics more approachable by having well-known or stylized figures explain concepts using unexpected, entertaining analogies. While the tone is playful and unhinged, the learning goals are serious.
 The project is intentionally designed as a learning sandbox for Java, backend development, and object-oriented programming, while also simulating real-world software engineering practices (clean architecture, Git workflows, deployment, collaboration).
 
@@ -14,7 +14,6 @@ Features and APIs may change frequently.
 Java JDK installed
 Maven installed
 (Optional) You can use Chocolatey on Windows to install Java and Maven
-
 
 ## Running the Application Locally (Manual Testing): 
 1. Navigate to project root
@@ -36,6 +35,3 @@ This command will:
    2. Run all JUnit tests located under src/test/java
    3. Report any test failures or errors in the terminal
    4. If the command finishes with BUILD SUCCESS, all tests passed.
-
-
-
