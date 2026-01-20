@@ -5,7 +5,7 @@ import com.mentorguild.model.Mentor;
 import com.mentorguild.repository.MentorRepository;
 import com.mentorguild.service.MentorService;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,7 +30,7 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public Collection<Mentor> getAllMentors(){
+    public List<Mentor> getAllMentors(){
         return mentorRepository.findAll();
     }
 
