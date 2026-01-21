@@ -2,31 +2,36 @@ package com.mentorguild.service.impl;
 
 import com.mentorguild.model.Mentor;
 
+import com.mentorguild.repository.MentorRepository;
 import com.mentorguild.service.MentorService;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MentorServiceImpl implements MentorService {
-    private final Map<Integer, Mentor> mentorsById = new HashMap<>();
+    private final MentorRepository mentorRepository;
 
-    public void addMentor(Mentor mentor){
-        if(mentor == null){
+    public MentorServiceImpl(MentorRepository mentorRepository) {
+        this.mentorRepository = mentorRepository;
+    }
+    @Override
+    public UUID addMentor(Mentor mentor) {
+        if (mentor == null) {
             throw new IllegalArgumentException("Mentor cannot be null");
         }
-        if(mentorsById.containsKey(mentor.getIdNumber())){
-            throw new IllegalArgumentException("Duplicate mentor ID");
-        }
-        mentorsById.put(mentor.getIdNumber(), mentor);
+        return mentorRepository.save(mentor);
     }
+
     //example of autoboxing
-    public Mentor getMentorById(int idNumber){
-        return mentorsById.get(idNumber);
+   @Override
+    public Mentor getMentorById(UUID idNumber){
+        return mentorRepository.findById(idNumber).orElse(null);
     }
-    public Collection<Mentor> getAllMentors(){
-        return mentorsById.values();
+
+    @Override
+    public List<Mentor> getAllMentors(){
+        return mentorRepository.findAll();
     }
 
 }

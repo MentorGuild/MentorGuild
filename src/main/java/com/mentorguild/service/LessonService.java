@@ -1,15 +1,13 @@
 package com.mentorguild.service;
 
 import com.mentorguild.model.Lesson;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
+import java.util.UUID;
 
 public interface LessonService {
 
-    int addLesson(Lesson lesson);
+    UUID addLesson(Lesson lesson); //returns generated id
     List<Lesson> getAllLessons();
-    Lesson getLessonById (int lessonId);
+    Lesson getLessonById (UUID lessonId); //return null if not found (for now)
 
 }

@@ -1,13 +1,15 @@
 package com.mentorguild.model;
 
+import java.util.UUID;
+
 public class Mentor {
 //Private data
     private final String name;
     private final String catchphrase;
-    private final int idNumber;
+    private final UUID idNumber;
 
 //Constructor
-public Mentor(int idNumber, String name, String catchphrase) {
+public Mentor(UUID idNumber, String name, String catchphrase) {
     this.idNumber = idNumber;
     this.name = name;
     this.catchphrase = catchphrase;
@@ -20,7 +22,7 @@ public Mentor(int idNumber, String name, String catchphrase) {
     public String getCatchphrase(){
         return this.catchphrase;
     }
-    public int getIdNumber(){
+    public UUID getIdNumber(){
         return this.idNumber;
     }
 

@@ -1,12 +1,13 @@
 package com.mentorguild.service;
 
 import com.mentorguild.model.Mentor;
-import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 public interface MentorService {
-    void addMentor(Mentor mentor);
-    Mentor getMentorById(int idNumber);
-    Collection<Mentor> getAllMentors();
+    UUID addMentor(Mentor mentor);
+    Mentor getMentorById(UUID idNumber);
+    List<Mentor> getAllMentors();
 
 
 }
