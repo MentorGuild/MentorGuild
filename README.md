@@ -15,6 +15,10 @@ Java JDK installed
 Maven installed
 (Optional) You can use Chocolatey on Windows to install Java and Maven
 
+## Running the Database (Assumes you have Docker Desktop installed)
+1. Pull down the Postgres container: `docker pull postgres`
+2. Run Postgres: `docker run -d --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=password postgres`
+
 ## Running the Application Locally (Manual Testing): 
 1. Navigate to project root
 2. Clean and build application: mvn clean install

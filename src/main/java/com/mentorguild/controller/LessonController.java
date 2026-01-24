@@ -19,39 +19,34 @@ import java.util.UUID;
 public class LessonController {
     private final LessonService lessonService;
 
-//constructor
+    //constructor
     @Autowired
-    public LessonController(LessonService lessonService){
+    public LessonController(LessonService lessonService) {
         this.lessonService = lessonService;
 
     }
 
-//Methods
-//    public Lesson getLessonById(UUID lessonId){
-//        return lessonService.getLessonById(lessonId);
-//    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<String> displayLesson(
-        @PathVariable("id") UUID lessonId
-    ){
+    public ResponseEntity<Lesson> displayLesson(
+            @PathVariable("id") UUID lessonId
+    ) {
         Lesson lesson = lessonService.getLessonById(lessonId);
-        if(lesson == null){
-            return ResponseEntity.ok("Lesson not found"); // TODO: This should be 404
-        }
-        //lesson.displayLesson();
 
-        return ResponseEntity.ok("Displaying lesson");
+        if (lesson == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(lesson);
     }
 
     @PutMapping("/create")
-    public ResponseEntity<String> createLesson(
+    public ResponseEntity<Lesson> createLesson(
             @RequestBody Lesson lesson
-    ){
+    ) {
         //store via service
-       UUID newId = lessonService.addLesson(lesson);
+        lessonService.addLesson(lesson);
 
-        return ResponseEntity.ok("Lesson created " + newId);
+        return ResponseEntity.ok(lesson);
     }
 
 }
