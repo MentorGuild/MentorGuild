@@ -1,4 +1,5 @@
 package com.mentorguild.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,17 +15,18 @@ import java.util.UUID;
 public class MentorController {
     private final MentorService mentorService;
 
-@Autowired
-public MentorController(MentorService mentorService){
-    this.mentorService = mentorService;
-}
+    @Autowired
+    public MentorController(MentorService mentorService) {
+        this.mentorService = mentorService;
+    }
 
     //GET /api/mentors
-@GetMapping("")
-    public ResponseEntity<List<Mentor>> getAllMentors(){
-    List<Mentor> mentors = mentorService.getAllMentors();
-    return ResponseEntity.ok(mentors);
-}
+    @GetMapping("")
+    public ResponseEntity<List<Mentor>> getAllMentors() {
+        List<Mentor> mentors = mentorService.getAllMentors();
+        return ResponseEntity.ok(mentors);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Mentor> getMentorById(@PathVariable UUID id) {
         Mentor mentor = mentorService.getMentorById(id);

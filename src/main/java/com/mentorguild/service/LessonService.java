@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public interface LessonService {
 
-    UUID addLesson(Lesson lesson); //returns generated id
+    void addLesson(Lesson lesson); //returns generated id
     List<Lesson> getAllLessons();
     Lesson getLessonById (UUID lessonId); //return null if not found (for now)
 

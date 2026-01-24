@@ -7,7 +7,7 @@ import java.util.UUID;
 
 //Interface defines what not how
 public interface LessonRepository {
-    UUID save(Lesson lesson);              // saves a lesson & returns generated id
+    void save(Lesson lesson);              // saves a lesson & returns generated id
     Optional<Lesson> findById(UUID id); //finds a lesson by ID
     List<Lesson> findAll(); //Retrieves all lessons
 }
