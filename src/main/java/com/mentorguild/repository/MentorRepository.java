@@ -6,7 +6,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface MentorRepository {
-    UUID save(Mentor mentor);              // saves a mentor & returns generated id
-    Optional<Mentor> findById(UUID id); //finds a mentor by ID
-    List<Mentor> findAll(); //Retrieves all mentors
+  UUID save(Mentor mentor); // saves a mentor & returns generated id
+
+  Optional<Mentor> findById(UUID id); // finds a mentor by ID
+
+  List<Mentor> findAll(); // Retrieves all mentors
 }

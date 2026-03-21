@@ -1,15 +1,15 @@
 package com.mentorguild.repository;
-import com.mentorguild.model.Lesson;
 
-import java.util.Optional;
+import com.mentorguild.model.Lesson;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-//Interface defines what not how
+// Interface defines what not how
 public interface LessonRepository {
-    void save(Lesson lesson);              // saves a lesson & returns generated id
-    Optional<Lesson> findById(UUID id); //finds a lesson by ID
-    List<Lesson> findAll(); //Retrieves all lessons
+  void save(Lesson lesson); // saves a lesson & returns generated id
+
+  Optional<Lesson> findById(UUID id); // finds a lesson by ID
+
+  List<Lesson> findAll(); // Retrieves all lessons
 }
-
-

@@ -10,5 +10,4 @@ public class HealthController {
   public String index() {
     return "I'm alive";
   }
-
 }
