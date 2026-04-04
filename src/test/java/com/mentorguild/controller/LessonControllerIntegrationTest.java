@@ -1,7 +1,7 @@
 package com.mentorguild.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +26,7 @@ class LessonControllerIntegrationTest {
 
   @Test
   void createAndRetrieveLesson() throws Exception {
-    // 1. Create a lesson via PUT
+    // 1. Create a lesson via POST
     Mentor mentor = new Mentor("Professor Firewall", "Trust nothing.");
     Lesson lesson =
         new Lesson(
@@ -41,9 +41,7 @@ class LessonControllerIntegrationTest {
     MvcResult createResult =
         mockMvc
             .perform(
-                put("/api/lessons/create")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(jsonPayload))
+                post("/api/lessons").contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.lessonId").exists())
             .andExpect(jsonPath("$.title").value("Intro to Security"))
