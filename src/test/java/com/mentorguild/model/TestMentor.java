@@ -1,6 +1,4 @@
-package com.mentorguild.test.model;
-
-import com.mentorguild.model.Mentor;
+package com.mentorguild.model;
 
 public class TestMentor {
   public static void main(String[] args) {

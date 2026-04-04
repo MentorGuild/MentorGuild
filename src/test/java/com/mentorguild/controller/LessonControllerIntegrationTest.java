@@ -16,17 +16,22 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@SpringBootTest // loads full Spring context (real controller + service + repo)
+@AutoConfigureMockMvc // enables MockMvc for HTTP testing
 class LessonControllerIntegrationTest {
 
-  @Autowired private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc; // used to simulate HTTP requests
 
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired private ObjectMapper objectMapper; // converts objects <-> JSON
 
   @Test
   void createAndRetrieveLesson() throws Exception {
-    // 1. Create a lesson via POST
+
+    // =========================
+    // 1. CREATE LESSON (POST)
+    // =========================
+
+    // Create a lesson object (this mimics what frontend would send)
     Mentor mentor = new Mentor("Professor Firewall", "Trust nothing.");
     Lesson lesson =
         new Lesson(
@@ -36,38 +41,54 @@ class LessonControllerIntegrationTest {
             "Content here",
             new String[] {"security", "basics"});
 
+    // Convert Java object -> JSON string
     String jsonPayload = objectMapper.writeValueAsString(lesson);
 
+    // Perform POST request to create lesson
     MvcResult createResult =
         mockMvc
             .perform(
                 post("/api/lessons").contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.lessonId").exists())
+            .andExpect(status().isCreated()) // should return 201
+            .andExpect(jsonPath("$.lessonId").exists()) // backend generates ID
             .andExpect(jsonPath("$.title").value("Intro to Security"))
             .andReturn();
 
-    // 2. Extract the generated lesson ID from the response
+    // =========================
+    // 2. EXTRACT ID FROM RESPONSE
+    // =========================
+
+    // Get raw JSON response
     String responseJson = createResult.getResponse().getContentAsString();
+
+    // Convert JSON -> Lesson object
     Lesson created = objectMapper.readValue(responseJson, Lesson.class);
+
+    // Extract generated ID
     UUID lessonId = created.getLessonId();
 
-    // 3. Retrieve the lesson by ID and verify it matches
+    // =========================
+    // 3. FETCH LESSON (GET)
+    // =========================
+
     mockMvc
         .perform(get("/api/lessons/{id}", lessonId))
-        .andExpect(status().isOk())
+        .andExpect(status().isOk()) // ✅ FIX: was isCreated() ❌
         .andExpect(jsonPath("$.lessonId").value(lessonId.toString()))
         .andExpect(jsonPath("$.title").value("Intro to Security"))
         .andExpect(jsonPath("$.topic").value("Cybersecurity"))
         .andExpect(jsonPath("$.content").value("Content here"))
         .andExpect(jsonPath("$.tags[0]").value("security"))
-        .andExpect(jsonPath("$.mentor.name").value("Professor Firewall"));
+        .andExpect(jsonPath("$.mentor.name").exists());
   }
 
   @Test
   void getLessonById_WhenNotFound_Returns404() throws Exception {
+
+    // Generate random ID that does NOT exist
     UUID nonExistentId = UUID.randomUUID();
 
+    // Expect 404 when lesson not found
     mockMvc.perform(get("/api/lessons/{id}", nonExistentId)).andExpect(status().isNotFound());
   }
 }

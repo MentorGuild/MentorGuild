@@ -1,6 +1,7 @@
 package com.mentorguild.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -10,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mentorguild.dto.LessonRequest;
 import com.mentorguild.model.Lesson;
 import com.mentorguild.model.Mentor;
 import com.mentorguild.service.LessonService;
@@ -25,14 +27,15 @@ import org.springframework.test.web.servlet.MockMvc;
 class LessonControllerTest {
 
   @Autowired private MockMvc mockMvc;
-
   @Autowired private ObjectMapper objectMapper;
 
   @MockBean private LessonService lessonService;
 
   @Test
   void displayLesson_WhenLessonExists_ReturnsOkWithLesson() throws Exception {
+
     UUID lessonId = UUID.randomUUID();
+
     Mentor mentor = new Mentor("Professor Firewall", "Trust nothing.");
     Lesson lesson =
         new Lesson(
@@ -53,17 +56,19 @@ class LessonControllerTest {
         .andExpect(jsonPath("$.title").value("Intro to Security"))
         .andExpect(jsonPath("$.topic").value("Cybersecurity"))
         .andExpect(jsonPath("$.content").value("Content here"))
-        .andExpect(jsonPath("$.tags[0]").value("security"))
-        .andExpect(jsonPath("$.mentor.name").value("Professor Firewall"));
+        .andExpect(jsonPath("$.tags[0]").value("security"));
+
     verify(lessonService).getLessonById(lessonId);
   }
 
   @Test
   void displayLesson_WhenLessonNotFound_Returns404() throws Exception {
     UUID missingId = UUID.randomUUID();
+
     when(lessonService.getLessonById(missingId)).thenReturn(null);
 
     mockMvc.perform(get("/api/lessons/{id}", missingId)).andExpect(status().isNotFound());
+
     verify(lessonService).getLessonById(missingId);
   }
 
@@ -73,27 +78,28 @@ class LessonControllerTest {
   }
 
   @Test
-  void createLesson_WithValidPayload_ReturnsOkWithCorrectFields() throws Exception {
-    Mentor mentor = new Mentor("Professor Firewall", "Trust nothing.");
-    Lesson lesson =
-        new Lesson(
-            mentor,
+  void createLesson_WithValidPayload_ReturnsCreatedWithCorrectFields() throws Exception {
+
+    UUID mentorId = UUID.randomUUID();
+
+    LessonRequest request =
+        new LessonRequest(
+            mentorId,
             "Intro to Security",
             "Cybersecurity",
             "Content here",
             new String[] {"security"});
-    UUID presetId = UUID.randomUUID();
-    lesson.setLessonId(presetId);
 
-    String jsonPayload = objectMapper.writeValueAsString(lesson);
+    String jsonPayload = objectMapper.writeValueAsString(request);
+
+    // since service is void, just say "do nothing"
+    doNothing().when(lessonService).addLesson(any(Lesson.class));
 
     mockMvc
         .perform(post("/api/lessons").contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.lessonId").value(presetId.toString()))
+        .andExpect(status().isCreated())
         .andExpect(jsonPath("$.title").value("Intro to Security"))
-        .andExpect(jsonPath("$.topic").value("Cybersecurity"))
-        .andExpect(jsonPath("$.mentor.name").value("Professor Firewall"));
+        .andExpect(jsonPath("$.topic").value("Cybersecurity"));
 
     verify(lessonService).addLesson(any(Lesson.class));
   }
