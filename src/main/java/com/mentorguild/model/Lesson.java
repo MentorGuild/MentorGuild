@@ -8,28 +8,28 @@ public class Lesson {
   // Fields
   private UUID lessonId;
 
-  @JsonProperty("Mentor")
+  @JsonProperty("mentor")
   private final Mentor mentor;
 
-  @JsonProperty("Title")
+  @JsonProperty("title")
   private final String title;
 
-  @JsonProperty("Topic")
+  @JsonProperty("topic")
   private final String topic;
 
-  @JsonProperty("Content")
+  @JsonProperty("content")
   private final String content;
 
-  @JsonProperty("Tags")
+  @JsonProperty("tags")
   private final String[] tags;
 
   @JsonCreator
   public Lesson(
-      @JsonProperty("Mentor") Mentor mentor,
-      @JsonProperty("Title") String title,
-      @JsonProperty("Topic") String topic,
-      @JsonProperty("Content") String content,
-      @JsonProperty("Tags") String[] tags) {
+      @JsonProperty("mentor") Mentor mentor,
+      @JsonProperty("title") String title,
+      @JsonProperty("topic") String topic,
+      @JsonProperty("content") String content,
+      @JsonProperty("tags") String[] tags) {
     this.mentor = mentor;
     this.title = title;
     this.topic = topic;

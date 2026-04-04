@@ -50,11 +50,11 @@ class LessonControllerTest {
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.lessonId").value(lessonId.toString()))
-        .andExpect(jsonPath("$.Title").value("Intro to Security"))
-        .andExpect(jsonPath("$.Topic").value("Cybersecurity"))
-        .andExpect(jsonPath("$.Content").value("Content here"))
-        .andExpect(jsonPath("$.Tags[0]").value("security"))
-        .andExpect(jsonPath("$.Mentor.Name").value("Professor Firewall"));
+        .andExpect(jsonPath("$.title").value("Intro to Security"))
+        .andExpect(jsonPath("$.topic").value("Cybersecurity"))
+        .andExpect(jsonPath("$.content").value("Content here"))
+        .andExpect(jsonPath("$.tags[0]").value("security"))
+        .andExpect(jsonPath("$.mentor.name").value("Professor Firewall"));
     verify(lessonService).getLessonById(lessonId);
   }
 
@@ -92,9 +92,9 @@ class LessonControllerTest {
             put("/api/lessons/create").contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.lessonId").value(presetId.toString()))
-        .andExpect(jsonPath("$.Title").value("Intro to Security"))
-        .andExpect(jsonPath("$.Topic").value("Cybersecurity"))
-        .andExpect(jsonPath("$.Mentor.Name").value("Professor Firewall"));
+        .andExpect(jsonPath("$.title").value("Intro to Security"))
+        .andExpect(jsonPath("$.topic").value("Cybersecurity"))
+        .andExpect(jsonPath("$.mentor.name").value("Professor Firewall"));
 
     verify(lessonService).addLesson(any(Lesson.class));
   }

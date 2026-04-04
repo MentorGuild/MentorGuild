@@ -8,16 +8,16 @@ public class Mentor {
   // Fields
   private final UUID idNumber;
 
-  @JsonProperty("Name")
+  @JsonProperty("name")
   private final String name;
 
-  @JsonProperty("Catchphrase")
+  @JsonProperty("catchphrase")
   private final String catchphrase;
 
   // Constructor
   @JsonCreator
   public Mentor(
-      @JsonProperty("Name") String name, @JsonProperty("Catchphrase") String catchphrase) {
+      @JsonProperty("name") String name, @JsonProperty("catchphrase") String catchphrase) {
     this.idNumber = UUID.randomUUID();
 
     this.name = name;

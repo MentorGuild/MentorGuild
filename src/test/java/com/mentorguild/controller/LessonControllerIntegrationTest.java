@@ -46,7 +46,7 @@ class LessonControllerIntegrationTest {
                     .content(jsonPayload))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.lessonId").exists())
-            .andExpect(jsonPath("$.Title").value("Intro to Security"))
+            .andExpect(jsonPath("$.title").value("Intro to Security"))
             .andReturn();
 
     // 2. Extract the generated lesson ID from the response
@@ -59,11 +59,11 @@ class LessonControllerIntegrationTest {
         .perform(get("/api/lessons/{id}", lessonId))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.lessonId").value(lessonId.toString()))
-        .andExpect(jsonPath("$.Title").value("Intro to Security"))
-        .andExpect(jsonPath("$.Topic").value("Cybersecurity"))
-        .andExpect(jsonPath("$.Content").value("Content here"))
-        .andExpect(jsonPath("$.Tags[0]").value("security"))
-        .andExpect(jsonPath("$.Mentor.Name").value("Professor Firewall"));
+        .andExpect(jsonPath("$.title").value("Intro to Security"))
+        .andExpect(jsonPath("$.topic").value("Cybersecurity"))
+        .andExpect(jsonPath("$.content").value("Content here"))
+        .andExpect(jsonPath("$.tags[0]").value("security"))
+        .andExpect(jsonPath("$.mentor.name").value("Professor Firewall"));
   }
 
   @Test
