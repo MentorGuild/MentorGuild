@@ -19,7 +19,7 @@ public class MentorController {
   }
 
   // GET /api/mentors
-  @GetMapping("")
+  @GetMapping
   public ResponseEntity<List<Mentor>> getAllMentors() {
     List<Mentor> mentors = mentorService.getAllMentors();
     return ResponseEntity.ok(mentors);
