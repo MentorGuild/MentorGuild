@@ -1,12 +1,12 @@
-package test;
-import main.java.com.mentorguild.model.Lesson;
-import main.java.com.mentorguild.model.Mentor;
+package com.mentorguild.test.model;
+import com.mentorguild.model.Lesson;
+import com.mentorguild.model.Mentor;
 
 public class TestLesson {
     public static void main(String[] args) {
 
         Mentor mentor = new Mentor(
-                42,
+
                 "Professor Firewall",
                 "Trust nothing. Verify everything."
         );
@@ -30,12 +30,11 @@ public class TestLesson {
                         What makes network security challenging is that attackers only need one mistake to succeed, while defenders must protect everything at all times. 
                         This lesson introduces the core ideas behind network security and starts training you to think critically about how systems can fail—and how to stop that from happening.
                         """,
-                tags,
-                101
+                tags
+
         );
 
         System.out.println("=== Lesson Test ===");
-        lesson.displayLesson();
 
         // Getter sanity checks
         System.out.println("\n=== Getter Checks ===");

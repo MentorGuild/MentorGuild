@@ -1,11 +1,11 @@
-package test;
+package com.mentorguild.test.model;
+import com.mentorguild.model.Mentor;
 
-import main.java.com.mentorguild.model.Mentor;
 
 public class TestMentor {
 public static void main(String[] args){
     Mentor mentor = new Mentor(
-            1,
+
             "Chaos Goblin",
             "Security is just vibes with paperwork."
     );
@@ -15,7 +15,7 @@ public static void main(String[] args){
     System.out.println("ID: " + mentor.getIdNumber());
     System.out.println("Name: " + mentor.getName());
     System.out.println("Catchphrase:");
-    mentor.speak();
+
 
     // Expected output check
     System.out.println("\nExpected:");
