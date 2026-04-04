@@ -4,7 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -88,8 +88,7 @@ class LessonControllerTest {
     String jsonPayload = objectMapper.writeValueAsString(lesson);
 
     mockMvc
-        .perform(
-            put("/api/lessons/create").contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
+        .perform(post("/api/lessons").contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.lessonId").value(presetId.toString()))
         .andExpect(jsonPath("$.title").value("Intro to Security"))
@@ -102,7 +101,7 @@ class LessonControllerTest {
   @Test
   void createLesson_WithNoBody_Returns400() throws Exception {
     mockMvc
-        .perform(put("/api/lessons/create").contentType(MediaType.APPLICATION_JSON))
+        .perform(post("/api/lessons").contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isBadRequest());
   }
 }
