@@ -9,6 +9,6 @@ public class Main {
 
   public static void main(String[] args) {
 
-      SpringApplication.run(Main.class, args); // Launch the Spring Boot app
+    SpringApplication.run(Main.class, args); // Launch the Spring Boot app
   }
 }
