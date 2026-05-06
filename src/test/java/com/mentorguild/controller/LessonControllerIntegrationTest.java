@@ -5,8 +5,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mentorguild.model.Lesson;
-import com.mentorguild.model.Mentor;
+import com.mentorguild.dto.LessonRequest;
+import com.mentorguild.dto.LessonResponse;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +31,17 @@ class LessonControllerIntegrationTest {
     // 1. CREATE LESSON (POST)
     // =========================
 
-    // Create a lesson object (this mimics what frontend would send)
-    Mentor mentor = new Mentor("Professor Firewall", "Trust nothing.");
-    Lesson lesson =
-        new Lesson(
-            mentor,
+    // Create request DTO (mimics frontend API payload)
+    LessonRequest request =
+        new LessonRequest(
+            UUID.randomUUID(),
             "Intro to Security",
             "Cybersecurity",
             "Content here",
             new String[] {"security", "basics"});
 
     // Convert Java object -> JSON string
-    String jsonPayload = objectMapper.writeValueAsString(lesson);
+    String jsonPayload = objectMapper.writeValueAsString(request);
 
     // Perform POST request to create lesson
     MvcResult createResult =
@@ -62,7 +61,7 @@ class LessonControllerIntegrationTest {
     String responseJson = createResult.getResponse().getContentAsString();
 
     // Convert JSON -> Lesson object
-    Lesson created = objectMapper.readValue(responseJson, Lesson.class);
+    LessonResponse created = objectMapper.readValue(responseJson, LessonResponse.class);
 
     // Extract generated ID
     UUID lessonId = created.getLessonId();
