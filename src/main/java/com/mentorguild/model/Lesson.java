@@ -42,7 +42,7 @@ public class Lesson {
   }
 
   public String[] getTags() {
-      return tags != null ? tags.clone() : null;
+    return tags != null ? tags.clone() : null;
   }
 
   public UUID getLessonId() {
