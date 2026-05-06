@@ -40,9 +40,9 @@ public class LessonController {
     // create mentor (temporary for now)
     Mentor mentor = new Mentor("Professor Air Fryer", "Everything is better at 180 degrees.");
     Lesson lesson = LessonMapper.toLesson(request, mentor);
-    lessonService.addLesson(lesson);
-    return ResponseEntity.created(URI.create("/api/lessons/" + lesson.getLessonId()))
-        .body(LessonMapper.toLessonResponse(lesson));
+    Lesson savedLesson = lessonService.addLesson(lesson);
+    return ResponseEntity.created(URI.create("/api/lessons/" + savedLesson.getLessonId()))
+        .body(LessonMapper.toLessonResponse(savedLesson));
   }
 
   @GetMapping
