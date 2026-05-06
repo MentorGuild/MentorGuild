@@ -20,8 +20,8 @@ public class LessonServiceImpl implements LessonService {
 
   @Override
   public Lesson addLesson(Lesson lesson) {
-     lessonRepository.save(lesson); // repository assigns UUID
-      return lesson;
+    lessonRepository.save(lesson); // repository assigns UUID
+    return lesson;
   }
 
   @Override
