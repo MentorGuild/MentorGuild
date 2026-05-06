@@ -19,8 +19,9 @@ public class LessonServiceImpl implements LessonService {
   }
 
   @Override
-  public void addLesson(Lesson lesson) {
-    lessonRepository.save(lesson); // storage delegated to repository
+  public Lesson addLesson(Lesson lesson) {
+    lessonRepository.save(lesson); // repository assigns UUID
+    return lesson;
   }
 
   @Override

@@ -1,7 +1,6 @@
 package com.mentorguild.controller;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -92,12 +91,23 @@ class LessonControllerTest {
 
     String jsonPayload = objectMapper.writeValueAsString(request);
 
-    // since service is void, just say "do nothing"
-    doNothing().when(lessonService).addLesson(any(Lesson.class));
+    Mentor mentor = new Mentor("Professor Firewall", "Trust nothing.");
+
+    Lesson savedLesson =
+        new Lesson(
+            mentor,
+            "Intro to Security",
+            "Cybersecurity",
+            "Content here",
+            new String[] {"security"});
+    UUID lessonId = UUID.randomUUID();
+    savedLesson.setLessonId(lessonId);
+    when(lessonService.addLesson(any(Lesson.class))).thenReturn(savedLesson);
 
     mockMvc
         .perform(post("/api/lessons").contentType(MediaType.APPLICATION_JSON).content(jsonPayload))
         .andExpect(status().isCreated())
+        .andExpect(jsonPath("$.lessonId").value(lessonId.toString()))
         .andExpect(jsonPath("$.title").value("Intro to Security"))
         .andExpect(jsonPath("$.topic").value("Cybersecurity"));
 
