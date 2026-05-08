@@ -13,27 +13,52 @@
 
     <main class="lessons-page">
         <h1 class="lessons-title">Lessons</h1>
-
+        <!-- CREATE LESSON FORM -->
         <section class="lessons-outer">
-            <div class="lessons-grid">
-                <article class="lesson-card">
-                    <h3>Lesson 1:<br>Cybersecurity Terms</h3>
-                </article>
-                <article class="lesson-card">
-                    <h3>Lesson 2:<br>Signs of Phishing</h3>
-                </article>
-                <article class="lesson-card">
-                    <h3>Lesson 3:<br>Helpful resources</h3>
-                </article>
+            <h2>Create Lesson</h2>
+            <form id="lesson-form">
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Lesson title"
+                    required
+                >
 
-                <article class="lesson-card empty"></article>
-                <article class="lesson-card empty"></article>
-                <article class="lesson-card empty"></article>
+                <input
+                    type="text"
+                    id="topic"
+                    placeholder="Lesson topic"
+                    required
+                >
+
+                <textarea
+                    id="content"
+                    placeholder="Lesson content"
+                    required
+                ></textarea>
+
+                <input
+                        type="text"
+                        id="tags"
+                        placeholder="Comma separated tags"
+                >
+
+                <button type="submit" class="start-button">
+                        Create Lesson
+
+                </button>
+            </form>
+        </section>
+
+        <!-- LESSONS DISPLAY -->
+        <section class="lessons-outer">
+            <div class="lessons-grid" id="lessons-grid">
             </div>
         </section>
 
         <p style="text-align:center; margin-top:18px;"><a class="start-button" href="/">← Back to home</a></p>
     </main>
     <footer class="site-footer"><small>© MentorGuild</small></footer>
+    <script defer src="js/app.js"></script>
 </body>
 </html>
